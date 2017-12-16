@@ -10,14 +10,15 @@ const process = require('process')
 
 
 function getHtmlWebpackPluginConfs() {
+  let mdDir = path.resolve(__dirname, './post')
   let postsInfoPath = path.resolve(__dirname, './src/assets/posts_info.json')
-  let MDS_PATH = path.resolve(__dirname, './post')
+  let mdPaths = glob.sync(mdDir + '/**/*.md')
+
   let confs = []
   let postsInfo = []
-  let mdPaths = glob.sync(MDS_PATH + '/**/*.md')
 
   for (let [index, mdPath] of mdPaths.entries()) {
-    let rel_md_path = path.relative(MDS_PATH, mdPath)
+    let rel_md_path = path.relative(mdDir, mdPath)
     let rel_html_path = path.join(path.parse(rel_md_path).dir, path.parse(rel_md_path).name + '.html')
 
     // if md file is huge, this log may be useful
@@ -25,7 +26,7 @@ function getHtmlWebpackPluginConfs() {
 
     postsInfo.push({
       title: path.parse(mdPath).name,
-      path: rel_html_path,
+      href: 'dist/' + rel_html_path.replace('\\\\', '\\').replace('\\', '/')  // replace for windows
     })
     confs.push(
       new HtmlWebpackPlugin({
