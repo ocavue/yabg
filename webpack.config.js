@@ -1,5 +1,50 @@
-var path = require('path')
-var webpack = require('webpack')
+'use strict'
+
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const glob = require('glob')
+const fs = require('fs')
+const marked = require('marked')
+const process = require('process')
+
+
+function getHtmlWebpackPluginConfs() {
+  let mdDir = path.resolve(__dirname, './post')
+  let postsInfoPath = path.resolve(__dirname, './src/assets/posts_info.json')
+  let mdPaths = glob.sync(mdDir + '/**/*.md')
+
+  let confs = []
+  let postsInfo = []
+
+  for (let [index, mdPath] of mdPaths.entries()) {
+    let rel_md_path = path.relative(mdDir, mdPath)
+    let rel_html_path = path.join(path.parse(rel_md_path).dir, path.parse(rel_md_path).name + '.html')
+
+    // if md file is huge, this log may be useful
+    process.stdout.write(`  0% building html ${index + 1}/${mdPaths.length} ${rel_html_path} \r`)
+
+    postsInfo.push({
+      title: path.parse(mdPath).name,
+      href: 'dist/' + rel_html_path.replace('\\\\', '\\').replace('\\', '/')  // replace for windows
+    })
+    confs.push(
+      new HtmlWebpackPlugin({
+        hash: false,
+        cache: true,
+        title: path.parse(mdPath).name,
+        content: marked(fs.readFileSync(mdPath, 'utf8')),
+        template: './src/template.html',
+        filename: rel_html_path,
+        chunks: [],
+      })
+    )
+  }
+
+  fs.writeFileSync(postsInfoPath, JSON.stringify(postsInfo, null, 2))
+
+  return confs
+}
 
 module.exports = {
   entry: './src/main.js',
@@ -8,6 +53,7 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
+  plugins: [].concat(getHtmlWebpackPluginConfs()),
   module: {
     rules: [
       {

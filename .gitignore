@@ -1,4 +1,7 @@
+src/assets/posts_info.json
+
 .vscode/
+post/
 
 .DS_Store
 node_modules/
