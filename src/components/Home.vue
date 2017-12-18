@@ -12,13 +12,14 @@
 
 <script>
 import posts from '../assets/posts_info.json'
+import img from '../assets/cat-1285634_640.png'
 
 export default {
   name: 'Home',
   data () {
     return {
       posts: posts,
-      img: './src/assets/cat-1285634_640.png',
+      img: img,
     }
   }
 }
