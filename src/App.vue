@@ -50,6 +50,13 @@ export default {
 
 <style lang="scss">
 @import "theme.scss";
+$break-small: 600px;
+
+// https://material.io/guidelines/components/cards.html#cards-content-blocks
+// Card margins on mobile: Padding from edge of screen to card: 8dp; Space between cards: 8dp
+// larger sizes: as long as they follow Material Design 8dp grid
+$small-margin: 8px;
+$big-margin: 24px;
 
 body {
   margin: 0;
@@ -59,13 +66,19 @@ body {
   background: lightblue;  // TODO
 }
 .app-content {
-  margin: 16px;
+  margin: $small-margin;
+  @media screen and (min-width: $break-small) {
+    margin: $big-margin;
+  }
 }
 .app-content-card {
   background: white;
   width: 100%;
   max-width: 600px;
-  margin: 16px;
+  margin-bottom: $small-margin;
+    @media screen and (min-width: $break-small) {
+      margin-bottom: $big-margin;
+  }
 }
 .app-content-card--title{
   background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5));
