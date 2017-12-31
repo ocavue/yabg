@@ -40,7 +40,7 @@ export default {
 
 body {
   margin: 0;
-  background: $mdc-theme-background;
+  background: #fafafa;
 }
 .app-drawer-header{
   background: lightblue;  // TODO

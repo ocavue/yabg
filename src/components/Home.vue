@@ -39,8 +39,6 @@ export default {
 }
 .app-content-card--title{
   background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5));
-  font-size: 2em;
-  color: white;
 }
 .app-content-card--background {
   padding: 0;
