@@ -53,9 +53,10 @@ body {
   padding: $small-margin;
   @media screen and (min-width: $break-small) {
     padding: $big-margin;
+    padding-top: $big-margin * 2;  // less "crowd" around toolbar
   }
 }
-.app-drawer > nav  {
+.app-drawer > nav {
   overflow: scroll;
   position: fixed;
 }
