@@ -8,8 +8,11 @@ const fs = require('fs')
 const marked = require('marked')
 const process = require('process')
 
+function resolve (dir) {
+  return path.join(__dirname, dir)
+}
 
-function getHtmlWebpackPluginConfs() {
+function getHtmlWebpackPluginConfs () {
   let mdDir = path.resolve(__dirname, './post')
   let postsInfoPath = path.resolve(__dirname, './src/assets/posts_info.json')
   let mdPaths = glob.sync(mdDir + '/**/*.md')
@@ -90,7 +93,7 @@ module.exports = {
             'scss': [
               'vue-style-loader',
               'css-loader',
-              'sass-loader'
+              { loader: 'sass-loader', options: { includePaths: [resolve('node_modules')] } }
             ],
             'sass': [
               'vue-style-loader',
