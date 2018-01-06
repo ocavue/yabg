@@ -51,4 +51,8 @@ body {
     padding: $big-margin;
   }
 }
+.app-drawer > nav  {
+  overflow: scroll;
+  position: fixed;
+}
 </style>
