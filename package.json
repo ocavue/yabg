@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "vue": "^2.4.4",
-    "vue-mdc-adapter": "^0.6.5",
+    "vue-mdc-adapter": "^0.7.4",
     "vue-router": "^3.0.1"
   },
   "browserslist": [
