@@ -11,7 +11,7 @@
 
     <mdc-drawer class="app-drawer" slot="drawer" toggle-on="toggle-drawer">
       <mdc-drawer-header class="app-drawer-header">
-        TODO
+        <img class="app-drawer-header--logo" src="./assets/logo.png" alt="logo" align="middle">
       </mdc-drawer-header>
       <mdc-drawer-list>
         <mdc-drawer-item href="#" start-icon="inbox">TODO</mdc-drawer-item>
@@ -43,7 +43,11 @@ body {
   background: #fafafa;
 }
 .app-drawer-header{
-  background: lightblue;  // TODO
+  &--logo {
+    height: 96px;
+    width: 96px;
+    margin: auto;
+  }
 }
 .app-content {
   padding: $small-margin;
